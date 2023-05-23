@@ -6,6 +6,7 @@ const subscriptionRouter = require("./routes/subscription");
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/rate", rateRouter);
 app.use("/api/subscription", subscriptionRouter);
 
