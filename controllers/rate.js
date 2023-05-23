@@ -7,6 +7,6 @@ exports.convert = async (req, res, next) => {
 
   res.status(200).json({
     status: "success",
-    rate: `1 BTC is ${response.data.bitcoin.uah} UAH`,
+    rate: response.data.bitcoin.uah,
   });
 };
