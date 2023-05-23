@@ -3,11 +3,11 @@ const validator = require("validator");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 const fileIO = require("../utils/fileIO");
-const sendRate = require("../utils/sendMail");
+const sendMail = require("../utils/sendMail");
 
 exports.sendEmails = catchAsync(async (req, res, next) => {
   const emails = await fileIO.readEmails();
-  emails.forEach(sendRate);
+  emails.forEach(async (email) => await sendMail(email));
   res.status(200).json({ status: "success" });
 });
 
