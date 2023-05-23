@@ -6,14 +6,14 @@ exports.sendEmails = (req, res, next) => {};
 
 exports.subscribe = catchAsync(async (req, res, next) => {
   const email = req.body.email;
-  if (!email) return next(new AppError(400, "No email provided"));
+  if (!email) return next(new AppError(400, "E-mail не вказано"));
 
-  const emails = fileIO.readEmails();
+  const emails = await fileIO.readEmails();
   if (emails.includes(email))
-    return next(new AppError(409, "Email already subscribed"));
+    return next(new AppError(409, "E-mail вже було додано раніше"));
 
   emails.push(email);
-  fileIO.writeEmails(emails);
+  await fileIO.writeEmails(emails);
 
   res.status(200).json({ status: "success", message: "E-mail додано" });
 });
