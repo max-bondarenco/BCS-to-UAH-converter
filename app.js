@@ -16,10 +16,14 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   if (err.custom)
-    return res.status(err.statusCode).json({ error: err.message });
+    return res
+      .status(err.statusCode)
+      .json({ status: err.status, message: err.message });
 
   console.log(err);
-  res.status(500).json({ error: "Unknown error, try again later" });
+  res
+    .status(500)
+    .json({ status: "error", error: "Unknown error, try again later" });
 });
 
 module.exports = app;
