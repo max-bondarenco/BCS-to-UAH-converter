@@ -1,3 +1,5 @@
+const validator = require("validator");
+
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 const fileIO = require("../utils/fileIO");
@@ -7,6 +9,9 @@ exports.sendEmails = (req, res, next) => {};
 exports.subscribe = catchAsync(async (req, res, next) => {
   const email = req.body.email;
   if (!email) return next(new AppError(400, "E-mail не вказано"));
+
+  if (!validator.isEmail(email))
+    return next(new AppError(400, "E-mail має неправильний формат"));
 
   const emails = await fileIO.readEmails();
   if (emails.includes(email))
