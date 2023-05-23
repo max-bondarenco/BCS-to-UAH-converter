@@ -13,5 +13,7 @@ exports.subscribe = catchAsync(async (req, res, next) => {
     return next(new AppError(409, "Email already subscribed"));
 
   emails.push(email);
+  fileIO.writeEmails(emails);
+
   res.status(200).json({ status: "success", message: "E-mail додано" });
 });

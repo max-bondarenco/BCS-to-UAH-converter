@@ -7,7 +7,7 @@ exports.readEmails = async () => {
     .split(",");
 };
 
-exports.writeEmails = async () => {
+exports.writeEmails = async (emails) => {
   await util.promisify(fs.writeFile)(
     `${__dirname}/../data/emails.txt`,
     `${emails}`
