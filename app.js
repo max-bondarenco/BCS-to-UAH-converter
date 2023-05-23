@@ -7,8 +7,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api/rate", rateRouter);
-app.use("/api/subscription", subscriptionRouter);
+app.use("/api", rateRouter);
+app.use("/api", subscriptionRouter);
 
 app.use((req, res, next) => {
   res.status(404).json({ error: "Page not found" });

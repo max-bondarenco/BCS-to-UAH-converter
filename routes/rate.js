@@ -4,6 +4,6 @@ const rateController = require("../controllers/rate");
 
 const router = express.Router();
 
-router.route("/").get(rateController);
+router.route("/rate").get(rateController);
 
 module.exports = router;
